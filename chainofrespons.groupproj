@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0C4CAAFD-C119-4A40-99D9-D0B6EEDDC521}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="src\chainofresp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tests\chainofresptests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="chainofresp">
+        <MSBuild Projects="src\chainofresp.dproj"/>
+    </Target>
+    <Target Name="chainofresp:Clean">
+        <MSBuild Projects="src\chainofresp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="chainofresp:Make">
+        <MSBuild Projects="src\chainofresp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="chainofresptests">
+        <MSBuild Projects="tests\chainofresptests.dproj"/>
+    </Target>
+    <Target Name="chainofresptests:Clean">
+        <MSBuild Projects="tests\chainofresptests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="chainofresptests:Make">
+        <MSBuild Projects="tests\chainofresptests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="chainofresp;chainofresptests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="chainofresp:Clean;chainofresptests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="chainofresp:Make;chainofresptests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
